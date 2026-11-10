@@ -1,0 +1,19 @@
+
+AzureActivity
+| where TimeGenerated >= ago(90d)
+| where ResourceProviderValue =~ "MICROSOFT.MANAGEDIDENTITY"
+| where OperationNameValue has_any (
+    "write",
+    "delete"
+)
+| extend InitiatingUser = Caller
+| project
+    TimeGenerated,
+    InitiatingUser,
+    OperationNameValue,
+    ActivityStatusValue,
+    ResourceGroup,
+    ResourceId,
+    SubscriptionId,
+    CorrelationId
+| order by TimeGenerated desc
