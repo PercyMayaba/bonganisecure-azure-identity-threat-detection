@@ -1,0 +1,13 @@
+AADServicePrincipalSignInLogs
+| where TimeGenerated >= ago(30d)
+| extend AppName = AppDisplayName
+| project
+    TimeGenerated,
+    AppName,
+    ServicePrincipalName,
+    ResourceDisplayName,
+    IPAddress,
+    ResultType,
+    ResultDescription,
+    ConditionalAccessStatus
+| order by TimeGenerated desc
