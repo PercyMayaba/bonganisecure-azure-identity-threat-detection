@@ -1,0 +1,20 @@
+
+AzureActivity
+| where TimeGenerated >= ago(90d)
+| where OperationNameValue has "roleAssignments/write"
+| where ActivityStatusValue == "Succeeded"
+| extend InitiatingIdentity = Caller
+| extend AssignedRole = tostring(
+    parse_json(tostring(Properties)).requestbody
+)
+| project
+    TimeGenerated,
+    InitiatingIdentity,
+    OperationNameValue,
+    ActivityStatusValue,
+    ResourceGroup,
+    ResourceId,
+    SubscriptionId,
+    CorrelationId,
+    AssignedRole
+| order by TimeGenerated desc
