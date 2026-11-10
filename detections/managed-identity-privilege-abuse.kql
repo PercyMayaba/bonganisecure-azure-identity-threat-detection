@@ -1,0 +1,21 @@
+
+AzureActivity
+| where TimeGenerated >= ago(90d)
+| where OperationNameValue has_any (
+    "roleAssignments/write",
+    "roleAssignments/delete",
+    "userAssignedIdentities/write",
+    "userAssignedIdentities/delete"
+)
+| extend InitiatingIdentity = Caller
+| extend OperationStatus = ActivityStatusValue
+| project
+    TimeGenerated,
+    InitiatingIdentity,
+    OperationNameValue,
+    OperationStatus,
+    ResourceGroup,
+    ResourceId,
+    SubscriptionId,
+    CorrelationId
+| order by TimeGenerated desc
