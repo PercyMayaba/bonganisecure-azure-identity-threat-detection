@@ -63,6 +63,43 @@ This project develops practical skills relevant to:
 - Identity Governance and Administration
 - Cloud Incident Response
 
-## Current Status
+## Project Completion Status
 
-Project initiated. Technical modules and investigation evidence will be added progressively.
+This project developed an Azure identity threat detection and response framework using Microsoft Entra ID, Azure RBAC, managed identities, service principals, Azure Activity Logs and security investigation techniques.
+
+### Completed Modules
+
+1. Entra ID Sign-in Threat Investigation
+2. Privileged Role Assignment Threat Investigation
+3. Service Principal Security Investigation
+4. Managed Identity Threat Investigation
+5. Identity Security Monitoring Architecture
+6. Advanced Identity Threat Detection
+7. Security Operations and Incident Reporting
+
+### Evidence and Implementation Boundaries
+
+The project combines live investigations of the available Azure and Microsoft Entra environment with simulated threat scenarios and detection engineering.
+
+**Live investigation evidence includes:**
+- Entra ID sign-in log observations.
+- Azure RBAC role and scope reviews.
+- Service principal configuration reviews.
+- Managed identity configuration and activity investigations.
+- Azure Activity Log investigation and verification of Microsoft.ManagedIdentity provider registration.
+
+**Detection engineering includes:**
+- KQL detection query templates.
+- Privilege escalation and suspicious role assignment scenarios.
+- Service principal credential-change monitoring.
+- Managed identity privilege-abuse scenarios.
+- Identity lifecycle anomaly detection.
+- Incident response and reporting procedures.
+
+KQL queries are documented as detection templates and have not been validated through a deployed Microsoft Sentinel or Log Analytics environment. Threat scenarios are simulations and were not executed against the Azure subscription.
+
+### Professional Outcome
+
+This project demonstrates practical understanding of cloud identity security, identity governance, least-privilege RBAC, workload identity, security monitoring, threat investigation and incident response.
+
+It is designed as a portfolio project supporting progression toward Azure IAM Engineering and Azure Cloud Security Engineering roles.
