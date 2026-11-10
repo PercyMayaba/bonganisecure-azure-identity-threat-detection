@@ -1,0 +1,14 @@
+AzureActivity
+| where TimeGenerated >= ago(90d)
+| where OperationNameValue has "roleAssignments/write"
+| where ActivityStatusValue == "Succeeded"
+| extend InitiatingUser = Caller
+| project
+    TimeGenerated,
+    InitiatingUser,
+    OperationNameValue,
+    ActivityStatusValue,
+    ResourceGroup,
+    ResourceId,
+    SubscriptionId
+| order by TimeGenerated desc
