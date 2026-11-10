@@ -1,0 +1,32 @@
+
+AuditLogs
+| where TimeGenerated >= ago(90d)
+| where Category == "UserManagement"
+    or Category == "GroupManagement"
+    or Category == "ApplicationManagement"
+| where ActivityDisplayName has_any (
+    "Add user",
+    "Delete user",
+    "Update user",
+    "Add member to group",
+    "Remove member from group",
+    "Add service principal",
+    "Update service principal",
+    "Delete service principal"
+)
+| extend InitiatedByUser =
+    tostring(InitiatedBy.user.userPrincipalName)
+| extend InitiatedByApp =
+    tostring(InitiatedBy.app.displayName)
+| extend TargetIdentity =
+    tostring(TargetResources[0].displayName)
+| project
+    TimeGenerated,
+    Category,
+    ActivityDisplayName,
+    Result,
+    InitiatedByUser,
+    InitiatedByApp,
+    TargetIdentity,
+    CorrelationId
+| order by TimeGenerated desc
